@@ -1,0 +1,26 @@
+/* globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* Apply the background and text colors based on root variables */
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Optional: Add some additional styles */
+html {
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
