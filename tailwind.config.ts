@@ -8,7 +8,12 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx}', // If you have a components folder
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        customNavy: '#354a5f',
+      }
+
+    },
   },
   plugins: [require('daisyui')], // Add DaisyUI as a plugin
 };
