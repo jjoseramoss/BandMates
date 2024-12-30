@@ -16,6 +16,14 @@ const config: Config = {
     },
   },
   plugins: [require('daisyui')], // Add DaisyUI as a plugin
+  daisyui: {
+    themes: [
+      'light',
+      'dark',
+      'forest',
+      'dracula',
+    ],
+  },
 };
 
 export default config;
