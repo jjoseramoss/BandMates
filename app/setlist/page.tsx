@@ -81,6 +81,21 @@ function Page() {
 
   return (
     <div data-theme="forest" className="flex flex-col items-center min-h-screen bg-base-100 p-4">
+      <div className="drawer">
+          <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content">
+            {/* Page content here */}
+            <label htmlFor="my-drawer" className="btn btn-secondary drawer-button"><img src="/hamburger.png" alt="Menu Icon" className="w-6 h-6" /></label>
+          </div>
+          <div className="drawer-side">
+            <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+            <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+              {/* Sidebar content here */}
+              <li><a>Sidebar Item 1</a></li>
+              <li><a>Sidebar Item 2</a></li>
+            </ul>
+          </div>
+      </div>
       <h1 className="text-3xl font-bold mb-4 text-center">Setlist</h1>
       <div className="mb-4 w-full max-w-md flex justify-center space-x-2">
         <input
