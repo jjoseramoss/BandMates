@@ -9,6 +9,12 @@ type VideoType = {
   artist: string;
 };
 
+type SetlistType = {
+  id: number;
+  name: string;
+  videos: VideoType[];
+}
+
 function Thumbnail({ video, onClick }: { video: VideoType; onClick: () => void }) {
   const thumbnailUrl = `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`;
   return (
@@ -64,18 +70,30 @@ function Page() {
     artist: '',
   });
 
+  const [setlists, setSetlists] = useState<SetlistType[]>([]);
+  const [newSetlistName, setNewSetlistName] = useState('');
+
   const extractVideoId = (url: string) => {
     const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
     return match ? match[1] : '';
   };
 
-  const handleCreate = () => {
+  const handleCreateVideo = () => {
     const videoId = extractVideoId(newVideo.url);
     if (videoId) {
       setVideos([...videos, { ...newVideo, id: videos.length + 1, videoId }]);
       setNewVideo({ id: 0, videoId: '', url: '', title: '', artist: '' });
     } else {
       alert('Invalid YouTube URL');
+    }
+  };
+
+  const handleCreateSetlist = () => {
+    if(newSetlistName.trim() !== '') {
+      setSetlists([...setlists, { id: setlists.length + 1, name: newSetlistName, videos: [] }]);
+      setNewSetlistName('');
+    }else {
+      alert('Setlist name cannot be empty');
     }
   };
 
@@ -91,8 +109,21 @@ function Page() {
             <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
             <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
               {/* Sidebar content here */}
-              <li><a>Sidebar Item 1</a></li>
-              <li><a>Sidebar Item 2</a></li>
+              <li>
+                <input 
+                  type="text" 
+                  placeholder="New Setlist Name"
+                  value={newSetlistName}
+                  onChange={(e) => setNewSetlistName(e.target.value)}
+                  className = "input input-bordered mb-2"
+                />
+                <button className="btn btn-secondary mb-4" onClick={handleCreateSetlist}>Create Setlist</button>
+              </li>
+              {setlists.map((setlist) => (
+                <li key={setlist.id}>
+                  <a>{setlist.name}</a>
+                </li>
+              ))}
             </ul>
           </div>
       </div>
@@ -119,7 +150,7 @@ function Page() {
           onChange={(e) => setNewVideo({ ...newVideo, artist: e.target.value })}
           className="input input-bordered mb-2"
         />
-        <button className="btn btn-secondary" onClick={handleCreate}>Add Video</button>
+        <button className="btn btn-secondary" onClick={handleCreateVideo}>Add Video</button>
       </div>
       <div className="grid grid-cols-1 gap-4 mx-auto">
         {videos.map((video) => (
