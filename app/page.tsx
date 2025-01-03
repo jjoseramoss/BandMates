@@ -30,7 +30,7 @@ export default function Home() {
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
-            <li><a onClick={routeToSetlist}>Setlist</a></li>
+            <li><a href='/setlist'>Setlist</a></li>
             <li>
               <details>
                 <summary>Parent</summary>
